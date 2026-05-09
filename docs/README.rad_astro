@@ -10,8 +10,24 @@ after importing by using:
 
     help(rad_astro)
 
-
+# Build commands
 gr_modtool bind avg
+to rebind python bindings.
 
+run ldconfig to reload live into gnuradio.
 
-run ldconfig!!
+# Bugs
+Known issue where filewriter writes zeros for the first iteration.  Not sure why work is called with zeros in the buffers.
+
+# rad_astro avg:
+Intended to sum vectors of FFT magnitude data but can be used to sum any real vectors over multiple iterations.
+
+Chaining these together is advised when very large integration times are needed.
+
+# filewriter
+Writes raw floating point values to a file but keeps track of UTC epoch time in milliseconds for each recording that goes into the floating point binary.
+
+In other words you get two files, one with binary data and one with timestamps according to when a vector of binary values was written to that file.
+
+This is so you have a steady time tracking when each measurement was taken.
+
